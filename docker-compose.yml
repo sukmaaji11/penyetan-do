@@ -1,17 +1,44 @@
 services:
   postgres:
     image: postgres:15-alpine
+    container_name: penyetan_postgres
+    restart: always
 
     environment:
       POSTGRES_DB: penyetan
       POSTGRES_USER: penyetan
       POSTGRES_PASSWORD: password
 
-    ports:
-      - '5432:5432'
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: penyetan_backend
+    restart: always
+
+    depends_on:
+      - postgres
+
+    ports:
+      - '8000:8000'
+
+    environment:
+      DATABASE_URL: postgresql://penyetan:password@postgres:5432/penyetan
+
+  frontend:
+    build: ./frontend
+    container_name: penyetan_frontend
+    restart: always
+
+    depends_on:
+      - backend
+
+    ports:
+      - '3000:3000'
+
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
 
 volumes:
   postgres_data:
