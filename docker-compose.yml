@@ -38,7 +38,7 @@ services:
       - backend
 
     environment:
-      NEXT_PUBLIC_API_URL: 'https://penyetan-api.bra-dev.com'
+      NEXT_PUBLIC_API_URL: 'http://backend:8000'
 
     labels:
       - 'traefik.enable=true'
