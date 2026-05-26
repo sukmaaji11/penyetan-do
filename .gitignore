@@ -1,0 +1,45 @@
+# ======================
+# Backend (Python)
+# ======================
+
+backend/venv/
+backend/__pycache__/
+backend/**/*.pyc
+backend/.env
+
+# ======================
+# Frontend (Next)
+# ======================
+
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+
+# ======================
+# Docker
+# ======================
+
+postgres_data/
+*.log
+
+# ======================
+# System
+# ======================
+
+.DS_Store
+Thumbs.db
+
+# ======================
+# IDE
+# ======================
+
+.vscode/
+.idea/
+
+# ======================
+# Git
+# ======================
+
+.env
+.env*
