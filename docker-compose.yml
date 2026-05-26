@@ -28,12 +28,17 @@ services:
   frontend:
     build:
       context: ./frontend
+
     restart: always
+
     ports:
       - '3000:3000'
+
     depends_on:
       - backend
-    environment: NEXT_PUBLIC_API_URL=https://penyetan-api.bra-dev.com
+
+    environment:
+      NEXT_PUBLIC_API_URL: 'https://penyetan-api.bra-dev.com'
 
     labels:
       - 'traefik.enable=true'
