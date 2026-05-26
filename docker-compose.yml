@@ -1,44 +1,44 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: penyetan_postgres
     restart: always
-
     environment:
       POSTGRES_DB: penyetan
       POSTGRES_USER: penyetan
       POSTGRES_PASSWORD: password
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend
-    container_name: penyetan_backend
+    build:
+      context: ./backend
     restart: always
-
-    depends_on:
-      - postgres
-
     ports:
       - '8000:8000'
-
+    depends_on:
+      - postgres
     environment:
       DATABASE_URL: postgresql://penyetan:password@postgres:5432/penyetan
 
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.backend.rule=Host(`penyetan-api.bra-dev.com`)'
+      - 'traefik.http.services.backend.loadbalancer.server.port=8000'
+
   frontend:
-    build: ./frontend
-    container_name: penyetan_frontend
+    build:
+      context: ./frontend
     restart: always
-
-    depends_on:
-      - backend
-
     ports:
       - '3000:3000'
+    depends_on:
+      - backend
+    environment: NEXT_PUBLIC_API_URL=https://penyetan-api.bra-dev.com
 
-    environment:
-      NEXT_PUBLIC_API_URL: http://backend:8000
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.frontend.rule=Host(`penyetan-do.bra-dev.com`)'
+      - 'traefik.http.services.frontend.loadbalancer.server.port=3000'
 
 volumes:
   postgres_data:
