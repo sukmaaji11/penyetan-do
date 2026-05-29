@@ -281,7 +281,7 @@ ${notes || '-'}
 Mohon segera diproses 🙏
 `;
 
-      const ownerPhone = '6289633414555'; // Ganti dengan nomor WhatsApp pemilik
+      const ownerPhone = '6285168195005'; // Ganti dengan nomor WhatsApp pemilik
 
       window.open(
         `https://wa.me/${ownerPhone}?text=${encodeURIComponent(message)}`,
@@ -358,6 +358,7 @@ Mohon segera diproses 🙏
       </div>
     );
   }
+
   return (
     <div className="min-h-screen bg-[#fafafa]">
       {/* Header */}
@@ -436,8 +437,8 @@ Mohon segera diproses 🙏
 
       <div className="px-4 mt-8">
         <h2 className="text-xl text-black font-bold mb-4">🍗 Makanan</h2>
-        <span className="text-xs text-orange-600 font-small">
-          Belum termasuk nasi
+        <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 border border-amber-200">
+          🍚 Belum termasuk nasi
         </span>
         <div className="grid grid-cols-2 gap-4">{makanan.map(renderCard)}</div>
       </div>
@@ -600,6 +601,9 @@ Mohon segera diproses 🙏
               </button>
             </div>
 
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
             <input
               value={customerName}
               onChange={(e) => {
@@ -612,8 +616,9 @@ Mohon segera diproses 🙏
               placeholder="Nama"
               className="w-full border border-gray-200 rounded-xl p-3 mb-3 text-gray-500"
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
             )}
             <input
               value={phone}
@@ -629,10 +634,10 @@ Mohon segera diproses 🙏
               type="tel"
               inputMode="numeric"
             />
-            {errors.phone && (
-              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-            )}
 
+            {errors.address && (
+              <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+            )}
             <textarea
               value={address}
               onChange={(e) => {
@@ -642,11 +647,12 @@ Mohon segera diproses 🙏
                   name: '',
                 }));
               }}
-              placeholder="Alamat lengkap"
+              placeholder="Detail Alamat Misal : (Rumah Warna Hijau Gerbang Hitam)"
               className="w-full border rounded-xl p-3 mb-3 border-gray-200 text-gray-500"
             ></textarea>
-            {errors.address && (
-              <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+
+            {errors.location && (
+              <p className="text-red-500 text-sm mt-2">{errors.location}</p>
             )}
             <div className="mb-4">
               <button
@@ -655,9 +661,6 @@ Mohon segera diproses 🙏
               >
                 📍 Ambil Lokasi Saya
               </button>
-              {errors.location && (
-                <p className="text-red-500 text-sm mt-2">{errors.location}</p>
-              )}
               {location && (
                 <div className="bg-blue-50 rounded-xl p-3 mt-3">
                   <p className="text-sm text-gray-500">
