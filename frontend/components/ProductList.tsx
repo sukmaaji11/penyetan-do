@@ -283,10 +283,7 @@ Mohon segera diproses 🙏
 
       const ownerPhone = '6285168195005'; // Ganti dengan nomor WhatsApp pemilik
 
-      window.open(
-        `https://wa.me/${ownerPhone}?text=${encodeURIComponent(message)}`,
-        '_blank',
-      );
+      window.location.href = `https://api.whatsapp.com/send?phone=${ownerPhone}&text=${encodeURIComponent(message)}`;
 
       toast.success(`Pesanan berhasil 🔥`);
 
