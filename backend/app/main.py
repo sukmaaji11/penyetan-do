@@ -19,6 +19,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://penyetan-do.bra-dev.com",
         "http://localhost:3000"
     ],
     allow_credentials=True,
