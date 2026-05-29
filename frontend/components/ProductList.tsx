@@ -437,7 +437,7 @@ Mohon segera diproses 🙏
 
       <div className="px-4 mt-8">
         <h2 className="text-xl text-black font-bold mb-4">🍗 Makanan</h2>
-        <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 border border-amber-200">
+        <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 border border-amber-200 mb-2">
           🍚 Belum termasuk nasi
         </span>
         <div className="grid grid-cols-2 gap-4">{makanan.map(renderCard)}</div>
@@ -626,7 +626,7 @@ Mohon segera diproses 🙏
                 setPhone(e.target.value);
                 setErrors((prev) => ({
                   ...prev,
-                  name: '',
+                  phone: '',
                 }));
               }}
               placeholder="Nomor WhatsApp"
@@ -644,7 +644,7 @@ Mohon segera diproses 🙏
                 setAddress(e.target.value);
                 setErrors((prev) => ({
                   ...prev,
-                  name: '',
+                  address: '',
                 }));
               }}
               placeholder="Detail Alamat Misal : (Rumah Warna Hijau Gerbang Hitam)"
