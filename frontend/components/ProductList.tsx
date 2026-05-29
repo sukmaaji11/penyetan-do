@@ -436,13 +436,10 @@ Mohon segera diproses 🙏
 
       <div className="px-4 mt-8">
         <h2 className="text-xl text-black font-bold mb-4">🍗 Makanan</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          <span className="text-xs text-orange-600 font-small">
-            Belum termasuk nasi
-          </span>
-          {makanan.map(renderCard)}
-        </div>
+        <span className="text-xs text-orange-600 font-small">
+          Belum termasuk nasi
+        </span>
+        <div className="grid grid-cols-2 gap-4">{makanan.map(renderCard)}</div>
       </div>
 
       {/* ADDITIONAL */}
