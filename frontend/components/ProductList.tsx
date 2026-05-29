@@ -12,6 +12,7 @@ type ProductListProps = {
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 export default function ProductList({ products, settings }: ProductListProps) {
   const [cart, setCart] = useState<any[]>([]);
@@ -23,6 +24,50 @@ export default function ProductList({ products, settings }: ProductListProps) {
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
   const [showCart, setShowCart] = useState(false);
+
+  const [errors, setErrors] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    location: '',
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      phone: '',
+      address: '',
+      location: '',
+    };
+
+    let isValid = true;
+
+    if (!customerName.trim()) {
+      newErrors.name = 'Nama wajib diisi';
+      isValid = false;
+    }
+
+    const phoneRegex = /^08[0-9]{8,12}$/;
+
+    if (!phoneRegex.test(phone)) {
+      newErrors.phone = 'Nomor HP tidak valid';
+      isValid = false;
+    }
+
+    if (address.trim().length < 10) {
+      newErrors.address = 'Alamat terlalu pendek';
+      isValid = false;
+    }
+
+    if (!location) {
+      newErrors.location = 'Silakan ambil lokasi terlebih dahulu';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
+  };
 
   const addToCart = (product: any) => {
     const existing = cart.find((item) => item.id === product.id);
@@ -101,7 +146,9 @@ export default function ProductList({ products, settings }: ProductListProps) {
     >
       <div className="w-full h-[110px] overflow-hidden">
         <img
-          src={'/menu/placeholder.png'}
+          src={item.image}
+          height={600}
+          width={600}
           alt={item.name}
           className="w-full h-full object-cover hover:scale-110 duration-500 transition"
         />
@@ -149,8 +196,7 @@ export default function ProductList({ products, settings }: ProductListProps) {
   );
 
   async function handleCheckout() {
-    if (!customerName || !phone || !address) {
-      alert('Lengkapi data terlebih dahulu');
+    if (!validateForm()) {
       return;
     }
 
@@ -242,7 +288,7 @@ Mohon segera diproses 🙏
         '_blank',
       );
 
-      alert(`Pesanan berhasil 🔥`);
+      toast.success(`Pesanan berhasil 🔥`);
 
       setCart([]);
 
@@ -257,7 +303,7 @@ Mohon segera diproses 🙏
     } catch (error) {
       console.log(error);
 
-      alert('Gagal membuat pesanan');
+      toast.error('Gagal membuat pesanan');
     }
   }
 
@@ -296,7 +342,7 @@ Mohon segera diproses 🙏
       } catch (err) {
         console.log(err);
 
-        alert('Gagal mengambil lokasi');
+        toast.error('Gagal mengambil lokasi');
       }
     });
   }
@@ -391,7 +437,12 @@ Mohon segera diproses 🙏
       <div className="px-4 mt-8">
         <h2 className="text-xl text-black font-bold mb-4">🍗 Makanan</h2>
 
-        <div className="grid grid-cols-2 gap-4">{makanan.map(renderCard)}</div>
+        <div className="grid grid-cols-2 gap-4">
+          <span className="text-xs text-orange-600 font-small">
+            Belum termasuk nasi
+          </span>
+          {makanan.map(renderCard)}
+        </div>
       </div>
 
       {/* ADDITIONAL */}
@@ -554,25 +605,52 @@ Mohon segera diproses 🙏
 
             <input
               value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
+              onChange={(e) => {
+                setCustomerName(e.target.value);
+                setErrors((prev) => ({
+                  ...prev,
+                  name: '',
+                }));
+              }}
               placeholder="Nama"
               className="w-full border border-gray-200 rounded-xl p-3 mb-3 text-gray-500"
             />
-
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
             <input
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                setPhone(e.target.value);
+                setErrors((prev) => ({
+                  ...prev,
+                  name: '',
+                }));
+              }}
               placeholder="Nomor WhatsApp"
               className="w-full border rounded-xl p-3 mb-3 border-gray-200 text-gray-500"
+              type="tel"
+              inputMode="numeric"
             />
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            )}
 
             <textarea
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => {
+                setAddress(e.target.value);
+                setErrors((prev) => ({
+                  ...prev,
+                  name: '',
+                }));
+              }}
               placeholder="Alamat lengkap"
               className="w-full border rounded-xl p-3 mb-3 border-gray-200 text-gray-500"
             ></textarea>
-
+            {errors.address && (
+              <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+            )}
             <div className="mb-4">
               <button
                 onClick={getLocation}
@@ -580,7 +658,9 @@ Mohon segera diproses 🙏
               >
                 📍 Ambil Lokasi Saya
               </button>
-
+              {errors.location && (
+                <p className="text-red-500 text-sm mt-2">{errors.location}</p>
+              )}
               {location && (
                 <div className="bg-blue-50 rounded-xl p-3 mt-3">
                   <p className="text-sm text-gray-500">

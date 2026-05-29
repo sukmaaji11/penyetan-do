@@ -36,42 +36,42 @@ products = [
         name="Ayam Goreng",
         price=14000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/ayam-goreng.png"
     ),
 
     Product(
         name="Lele Goreng",
         price=10000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/lele-goreng.png"
     ),
 
     Product(
         name="Kepala Goreng",
         price=5000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/kepala-goreng.png"
     ),
 
     Product(
         name="Rempela Goreng",
         price=8000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/rempela-goreng.png"
     ),
 
     Product(
         name="Ayam Puyuh Goreng",
         price=12000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/ayam-puyuh-goreng.png"
     ),
 
     Product(
         name="Telur Goreng",
         price=6000,
         category="makanan",
-        image="/menu/placeholder.jpg"
+        image="/menu/telur-goreng.png"
     ),
 
     # ==========================
@@ -82,28 +82,28 @@ products = [
         name="Tahu Goreng",
         price=1500,
         category="additional",
-        image="/menu/placeholder.jpg"
+        image="/menu/tahu-goreng.png"
     ),
 
     Product(
         name="Tempe Goreng",
         price=1500,
         category="additional",
-        image="/menu/placeholder.jpg"
+        image="/menu/tempe-goreng.png"
     ),
 
     Product(
         name="Usus Goreng",
         price=4000,
         category="additional",
-        image="/menu/placeholder.jpg"
+        image="/menu/usus-goreng.png"
     ),
 
     Product(
         name="Nasi Putih",
         price=3000,
         category="additional",
-        image="/menu/placeholder.jpg"
+        image="/menu/nasi-putih.png"
     ),
 
     # ==========================
