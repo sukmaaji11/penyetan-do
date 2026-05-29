@@ -175,7 +175,7 @@ export default function ProductList({ products, settings }: ProductListProps) {
         })),
       };
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/`, {
         method: 'POST',
 
         headers: {
@@ -269,7 +269,7 @@ Mohon segera diproses 🙏
 
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/shipping/calculate`,
+          `${process.env.NEXT_PUBLIC_API_URL}/shipping/calculate/`,
           {
             method: 'POST',
 
