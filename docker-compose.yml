@@ -20,13 +20,13 @@ services:
     environment:
       DATABASE_URL: postgresql://penyetan:password@postgres:5432/penyetan
 
-  labels:
-    - 'traefik.enable=true'
-    - 'traefik.http.routers.backend.rule=Host(`penyetan-api.bra-dev.com`)'
-    - 'traefik.http.routers.backend.entrypoints=websecure'
-    - 'traefik.http.routers.backend.tls=true'
-    - 'traefik.http.routers.backend.tls.certresolver=mytlschallenge'
-    - 'traefik.http.services.backend.loadbalancer.server.port=8000'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.backend.rule=Host(`penyetan-api.bra-dev.com`)'
+      - 'traefik.http.routers.backend.entrypoints=websecure'
+      - 'traefik.http.routers.backend.tls=true'
+      - 'traefik.http.routers.backend.tls.certresolver=mytlschallenge'
+      - 'traefik.http.services.backend.loadbalancer.server.port=8000'
 
   frontend:
     build:
