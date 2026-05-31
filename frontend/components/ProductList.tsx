@@ -30,6 +30,7 @@ export default function ProductList({ products, settings }: ProductListProps) {
 
   useEffect(() => {
     const ua = navigator.userAgent.toLowerCase();
+    alert(navigator.userAgent);
 
     if (
       ua.includes('BytedanceWebview') ||
