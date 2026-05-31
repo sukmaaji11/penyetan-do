@@ -30,13 +30,8 @@ export default function ProductList({ products, settings }: ProductListProps) {
 
   useEffect(() => {
     const ua = navigator.userAgent.toLowerCase();
-    alert(navigator.userAgent);
-
-    if (
-      ua.includes('BytedanceWebview') ||
-      ua.includes('TTWebView') ||
-      ua.includes('musical_ly')
-    ) {
+    const isTikTok = ua.includes('appname/trill') || ua.includes('trill_');
+    if (isTikTok) {
       setShowBrowserModal(true);
     }
   }, []);
@@ -826,11 +821,26 @@ Mohon segera diproses 🙏
             <h2 className="text-xl font-bold">📍 Browser TikTok Terdeteksi</h2>
 
             <p className="mt-3 text-sm text-gray-600">
-              Browser TikTok terkadang tidak dapat mengambil lokasi sehingga
-              ongkir tidak bisa dihitung otomatis. Untuk pengalaman terbaik: 1.
-              Salin link halaman ini 2. Buka Chrome atau Safari 3. Tempel link
-              dan lanjutkan pemesanan
+              Browser TikTok sering menolak akses lokasi sehingga ongkir tidak
+              dapat dihitung secara otomatis.
             </p>
+
+            <div className="mt-4 space-y-2 rounded-lg bg-gray-50 p-4">
+              <div className="flex items-center gap-2 text-sm">
+                <span>📋</span>
+                <span>Salin link halaman ini</span>
+              </div>
+
+              <div className="flex items-center gap-2 text-sm">
+                <span>🌐</span>
+                <span>Buka Chrome atau Safari</span>
+              </div>
+
+              <div className="flex items-center gap-2 text-sm">
+                <span>📍</span>
+                <span>Tempel link dan lanjutkan pemesanan</span>
+              </div>
+            </div>
 
             <div className="mt-5 flex gap-2">
               <button
