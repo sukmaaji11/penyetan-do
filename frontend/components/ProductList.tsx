@@ -32,10 +32,9 @@ export default function ProductList({ products, settings }: ProductListProps) {
     const ua = navigator.userAgent.toLowerCase();
 
     if (
-      ua.includes('tiktok') ||
-      ua.includes('instagram') ||
-      ua.includes('fbav') ||
-      ua.includes('fban')
+      ua.includes('BytedanceWebview') ||
+      ua.includes('TTWebView') ||
+      ua.includes('musical_ly')
     ) {
       setShowBrowserModal(true);
     }
@@ -393,6 +392,16 @@ Mohon segera diproses 🙏
       },
     );
   }
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+
+      toast.success('Link berhasil disalin');
+    } catch {
+      toast.error('Gagal menyalin link');
+    }
+  };
 
   if (!settings.do_enabled) {
     return (
@@ -813,22 +822,21 @@ Mohon segera diproses 🙏
       {showBrowserModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="w-full max-w-md rounded-2xl bg-white p-6">
-            <h2 className="text-xl font-bold">Buka di Browser</h2>
+            <h2 className="text-xl font-bold">📍 Browser TikTok Terdeteksi</h2>
 
             <p className="mt-3 text-sm text-gray-600">
-              Untuk mendapatkan lokasi yang lebih akurat dan menghitung ongkir
-              otomatis, kami menyarankan membuka halaman ini di Chrome atau
-              Safari.
+              Browser TikTok terkadang tidak dapat mengambil lokasi sehingga
+              ongkir tidak bisa dihitung otomatis. Untuk pengalaman terbaik: 1.
+              Salin link halaman ini 2. Buka Chrome atau Safari 3. Tempel link
+              dan lanjutkan pemesanan
             </p>
 
             <div className="mt-5 flex gap-2">
               <button
-                onClick={() => {
-                  window.open(window.location.href, '_blank');
-                }}
-                className="flex-1 rounded-lg bg-green-600 py-3 text-white"
+                onClick={handleCopyLink}
+                className="w-full rounded-lg bg-green-600 py-3 text-white"
               >
-                Buka Browser
+                Salin Link
               </button>
 
               <button
